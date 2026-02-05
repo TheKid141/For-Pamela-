@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Pamela ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffdde1;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; 
+            text-align: center;
+        }
+
+        h1 {
+            color: #d6336c;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px #fff;
+            z-index: 10;
+        }
+
+        .buttons {
+            position: relative;
+            z-index: 10;
+        }
+
+        button {
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            padding: 20px 60px;
+            font-size: 2rem;
+            margin-right: 20px;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            background-color: #ff1f4b;
+        }
+
+        #noBtn {
+            background-color: #fff;
+            color: #ff4d6d;
+            padding: 10px 30px;
+            font-size: 1rem;
+            position: absolute; 
+            top: 20px; 
+            left: 200px;
+        }
+
+        /* The Funny Popup Container */
+        #popup {
+            position: absolute;
+            display: none;
+            z-index: 100;
+            pointer-events: none;
+            animation: popIn 0.3s ease-out;
+            text-align: center; /* Center text and image */
+        }
+
+        #popup img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* The Popup Text Style */
+        #popupText {
+            background-color: white;
+            color: red;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 10px;
+            margin-top: 5px;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+
+        /* Celebration Page */
+        #celebration {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #ff9a9e 0%, #fecfef 100%);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+
+        #celebration img {
+            width: 300px;
+            border-radius: 20px;
+            border: 5px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            margin-top: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        #celebration h1 {
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 2px 2px #ff4d6d;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Confetti CSS */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="mainPage">
+        <h1>Pamela, will you be my Valentine?</h1>
+        
+        <div class="buttons">
+            <button id="yesBtn" onclick="acceptProposal()">YES!</button>
+            <button id="noBtn" onclick="rejectProposal()">No</button>
+        </div>
+    </div>
+
+    <div id="popup">
+        <img id="popupImg" src="" alt="Funny Face">
+        <div id="popupText"></div>
+    </div>
+
+    <div id="celebration">
+        <h1>WAA555 ❤️</h1>
+        <img src="20260117_163454.jpg" alt="Us in the snow">
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const popup = document.getElementById('popup');
+        const popupImg = document.getElementById('popupImg');
+        const popupText = document.getElementById('popupText');
+        
+        // Image filenames (MUST BE IN SAME FOLDER)
+        const funnyImages = [
+            'Screenshot_20250528_195520_Instagram.jpg',
+            'Screenshot_20260204_230614_Photos(1).jpg'
+        ];
+
+        // Your custom teasing messages
+        const messages = [
+            "5ara l ja7sh 3lek wlaak",
+            "wallahi ja7sh",
+            "ammaaaaaa",
+            "fuck you broskis"
+        ];
+
+        let imageIndex = 0;
+
+        function rejectProposal() {
+            // 1. Show Popup over the CURRENT button position
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            popup.style.left = (btnRect.left - 50) + 'px'; // Center it a bit better
+            popup.style.top = (btnRect.top - 220) + 'px'; // Show above button
+            
+            // Set Image
+            popupImg.src = funnyImages[imageIndex];
+            
+            // Set Random Text
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            popupText.innerText = randomMsg;
+            
+            popup.style.display = 'block';
+
+            // 2. Hide Popup after 1 second
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 1000);
+
+            // 3. Alternate Image for next time
+            imageIndex = (imageIndex + 1) % funnyImages.length;
+
+            // 4. Move the No Button to a random spot
+            moveButton();
+        }
+
+        function moveButton() {
+            const maxX = window.innerWidth - noBtn.offsetWidth - 50; // Keep away from edge
+            const maxY = window.innerHeight - noBtn.offsetHeight - 50;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        function acceptProposal() {
+            popup.style.display = 'none'; 
+            
+            document.getElementById('mainPage').style.display = 'none';
+            const celebration = document.getElementById('celebration');
+            celebration.style.display = 'flex';
+            
+            createConfetti();
+        }
+
+        function createConfetti() {
+            const colors = ['#ff0', '#f00', '#0f0', '#00f', '#f0f', '#0ff'];
+            
+            setInterval(() => {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                document.getElementById('celebration').appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 4000);
+            }, 100);
+        }
+    </script>
+</body>
+</html>
